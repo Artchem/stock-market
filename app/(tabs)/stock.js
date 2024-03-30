@@ -1,10 +1,46 @@
-import { Pressable, StyleSheet, View } from "react-native";
+import { router } from "expo-router";
+import { Image } from "expo-image";
+import {
+  FlatList,
+  Pressable,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import { Text } from "react-native-paper";
+import { stocks } from "../../data";
+import { formatCurrecy } from "../../utils/formatCurrecy";
+import StockCard from "../../components/StockCard";
 
 export default function StockScreen() {
+  const { width } = useWindowDimensions();
+
   return (
     <View style={{ flex: 1, paddingTop: 30 }}>
-      <Text>Avalilable Stocks</Text>
+      <Text
+        variant="titleLarge"
+        style={{
+          fontWeight: "bold",
+          marginLeft: 5,
+          marginBottom: 5,
+        }}
+      >
+        Avalilable Stocks
+      </Text>
+      <FlatList
+        keyExtractor={(item) => item.ticker}
+        data={stocks}
+        renderItem={({ item }) => (
+          <StockCard
+            image={item.image}
+            ticker={item.ticker}
+            price={item.price}
+            companyName={item.companyName}
+            priceChange={item.priceChange}
+            priceChangePercentage={item.priceChangePercentage}
+          />
+        )}
+      />
     </View>
   );
 }

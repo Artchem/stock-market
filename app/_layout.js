@@ -3,9 +3,9 @@ import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
 
-import { PaperProvider } from "react-native-paper";
+import { PaperProvider, TextInput } from "react-native-paper";
 import { theme } from "../theme";
 
 export { ErrorBoundary } from "expo-router";
@@ -39,15 +39,50 @@ export default function RootLayout() {
   return <RootLayoutNav />;
 }
 
+export const StoreContext = createContext({
+  searchQuery: "",
+  setSearchQuery: () => {},
+  searchedStocks: [],
+  setSearchedStocks: () => {},
+});
+
 function RootLayoutNav() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchedStocks, setSearchedStocks] = useState([]);
+
   return (
     <PaperProvider theme={theme}>
       <ThemeProvider value={DarkTheme}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="[ticker]" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-        </Stack>
+        <StoreContext.Provider
+          value={{
+            searchQuery,
+            setSearchQuery,
+            searchedStocks,
+            setSearchedStocks,
+          }}
+        >
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="[ticker]" options={{ headerShown: false }} />
+            <Stack.Screen
+              name="search"
+              options={{
+                headerBackTitleVisible: false,
+                headerTitle: () => (
+                  <TextInput
+                    mode="outlined"
+                    placeholder="Search Stocks ..."
+                    autoFocus
+                    dense
+                    style={{ width: "88%" }}
+                    onChangeText={(text) => setSearchQuery(text)}
+                  />
+                ),
+              }}
+            />
+            <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+          </Stack>
+        </StoreContext.Provider>
       </ThemeProvider>
     </PaperProvider>
   );
