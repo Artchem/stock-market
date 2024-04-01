@@ -1,15 +1,7 @@
-import { router } from "expo-router";
-import { Image } from "expo-image";
-import {
-  FlatList,
-  Pressable,
-  StyleSheet,
-  useWindowDimensions,
-  View,
-} from "react-native";
+import { FlatList, StyleSheet, useWindowDimensions, View } from "react-native";
 import { Text } from "react-native-paper";
 import { stocks } from "../../data";
-import { formatCurrecy } from "../../utils/formatCurrecy";
+
 import StockCard from "../../components/StockCard";
 
 export default function StockScreen() {
