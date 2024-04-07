@@ -18,16 +18,24 @@ export default function StockCard({
   return (
     <Pressable
       style={{
+        width: "100%",
+        marginBottom: 5,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 50,
+        backgroundColor: "#132323",
+        borderStyle: "solid",
+        borderColor: "rgba(86, 219, 214, 0.18)",
+        borderWidth: 1,
+
         flexDirection: "row",
-        marginVertical: 10,
-        paddingHorizontal: 10,
-        height: 60,
+        height: 50,
       }}
       onPress={() => router.push(`/${ticker}`)}
     >
       <Image
         source={image}
-        style={{ height: 50, width: 50 }}
+        style={{ height: 30, width: 30 }}
         contentFit="contain"
       />
       <View

@@ -45,26 +45,32 @@ export default function TabLayout() {
       <Tabs.Screen
         name="stock"
         options={{
+          // headerShown: false,
           title: "Stock",
           tabBarIcon: ({ color }) => <TabBarIcon name="star-o" color={color} />,
-          header: () => (
-            <Pressable
-              style={{
-                width: "100%",
-                paddingHorizontal: 20,
-                paddingTop: 60,
-              }}
-              onPress={() => router.push("/search")}
-            >
-              <TextInput
-                placeholder="Search Stocks..."
-                disabled
-                mode="outlined"
-                left={<TextInput.Icon icon={"magnify"} />}
-                onPressIn={() => router.push("/search")}
-              ></TextInput>
-            </Pressable>
-          ),
+          // header: () => (
+          //   <Pressable
+          //     style={{
+          //       width: "100%",
+          //       paddingHorizontal: 20,
+          //       paddingTop: 60,
+          //     }}
+          //     onPress={() => router.push("/search")}
+          //   >
+          //     <TextInput
+          //       style={{
+          //         borderWidth: 1,
+          //         borderColor: "red",
+          //         borderRadius: "50%",
+          //       }}
+          //       placeholder="Search Stocks..."
+          //       disabled
+          //       mode="outlined"
+          //       left={<TextInput.Icon icon={"magnify"} />}
+          //       onPressIn={() => router.push("/search")}
+          //     ></TextInput>
+          //   </Pressable>
+          // ),
         }}
       />
 
